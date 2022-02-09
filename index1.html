@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <fieldset>
+        <div>
+            <h1>Calcul poids IdeaL </h1>
+            <label for="tx1"> taill </label>
+            <input type="text" id="tx1" name="taille">
+        </div>
+        <input type="radio" id="rd1" name="rd">
+        <input type="radio" id="rd2" name="rd">
+        <input type="radio" id="rd3" name="rd">
+
+
+        <div>
+            <label for="age"> Age   </label>
+            <input type="text" id="age">
+        </div>
+        <div>
+            <label for="ck1"> calcul imc</label>
+            <input type="checkbox" id="ck1">
+        </div>
+
+        <div>
+            <label for="poid"> poid </label>
+            <input type="text" id="poid">
+        </div>
+        <div>
+            <input type="button" name="" id="btn1" value="calculer">
+            <input type="button" name="" id="btn2" value="initialiser">
+        </div>
+        <div>
+            <label for="total"> poid total  </label>
+            <input type="text" id="total">
+
+        </div>
+        <div>
+            <label for="imc"> imc  </label>
+            <input type="text" id="imc">
+
+        </div>
+
+    </fieldset>
+    <script>
+        var rd = document.getElementById("rd1")
+        var rd1 = document.getElementById("rd2")
+        var rd2 = document.getElementById("rd3")
+        var age1 = document.getElementById("age")
+        var btn = document.getElementById("btn1")
+        var btn1 = document.getElementById("btn2")
+        var tx1 = document.getElementById("tx1")
+        var tx2 = document.getElementById("total")
+        var ck = document.getElementById("ck1")
+        var imc = document.getElementById("imc")
+        var date = new Date()
+        console.log(typeof(date.getFullYear()))
+        var a = [];
+
+        btn1.onclick = function() {
+            tx1.value = "";
+            tx2.value = "";
+            tx1.focus();
+            rd.checked = true;
+
+
+        }
+
+        /* 1 */
+        function calculimc(taille, poids) {
+            return poids / taille
+        }
+        /*2*/
+        function calculeselon(taille, age) {
+            var a = age.split("-"); 
+            if (rd.checked == true) {
+                return ((taille - 100 + (date.getFullYear() - a[0]) / 10) * 0.9).toFixed(2)
+            } else if (rd1.checked == true) {
+                return ((taille - 100 + (date.getFullYear() - a[0]) / 10) * 0.9 * 0.9).toFixed(2)
+            } else {
+                return ((taille - 100 + (date.getFullYear() - a[0]) / 10) * 0.9 * 1.1).toFixed(2)
+            }
+        }
+        /* 3*/
+        btn.onclick = function() {
+            if (ck.checked == true && tx1 != "" && tx2 != "") {
+                tx2.value = calculeselon(tx1.value, age1.value)
+                imc.value = calculimc(tx1.value, tx2.value)
+
+
+            } else {
+                alert("champ vide ")
+
+            }
+           
+        }
+        ck.onchange = function() {
+            if (ck.checked == true) {
+                imc.style.visibility = "visible";
+            } else {
+                imc.style.visibility = "hidden";
+            }
+
+        }
+    </script>
+</body>
+
+</html>
